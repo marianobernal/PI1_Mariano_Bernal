@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import ast
 
 app = FastAPI()
-dfsteam = pd.read_csv("PI MLOps - STEAM/dfSteamFunciones.csv",encoding='utf-8')
+dfsteam = pd.read_csv("Archivos/dfSteamFunciones.csv",encoding='utf-8')
 
 dfsteam.rename(columns={'Año': 'Year'}, inplace=True)
 
