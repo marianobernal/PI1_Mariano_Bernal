@@ -120,6 +120,6 @@ Por último lo que hicimos para lograr deployar las funciones solicitadas en una
 
 **`Repositorio`**: https://github.com/marianobernal/PI1_Mariano_Bernal  
 
-**`Video deployment`**: https://github.com/marianobernal/PI1_Mariano_Bernal 
+**`Video deployment`**: https://youtu.be/PrcRiTZJcjw
 
 
