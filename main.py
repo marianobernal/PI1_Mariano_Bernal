@@ -115,7 +115,7 @@ def metascore (Year:int):
 dfml = pd.read_csv("Archivos/dfML.csv")
 y=dfml['Precio'].round(1)
 x=dfml.drop(columns=['Precio','Mes'])
-Modelo_árbol = DecisionTreeRegressor(max_depth=6)
+Modelo_árbol = DecisionTreeRegressor(max_depth=15)
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 0.25, random_state = 42)
 Modelo_árbol.fit(X_train,y_train)
 y_train_pred = Modelo_árbol.predict(X_train)
@@ -127,7 +127,6 @@ rmse = (mean_squared_error(y_test, y_test_pred, squared = False))
 def predict (Géneros:str,Acceso_temprano):
     """
     Esta función deber recibir 
-        - mes:el mes con números del 1 al 12
         - input_text: los géneros separados con coma seguido de un espacio y con el prefijo Género. Por ejemplo: 'Género_Action, Género_Accounting'
         - acceso_temprano: 1 para True o 0 para False
     La función devolverá el valor predicho seguido del RMSE del modelo
