@@ -114,7 +114,7 @@ def metascore (Year:int):
 
 dfml = pd.read_csv("Archivos/dfML.csv")
 y=dfml['Precio'].round(1)
-x=dfml.drop(columns=['Precio'])
+x=dfml.drop(columns=['Precio','Mes'])
 Modelo_árbol = DecisionTreeRegressor(max_depth=6)
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 0.25, random_state = 42)
 Modelo_árbol.fit(X_train,y_train)
@@ -124,7 +124,7 @@ rmse = (mean_squared_error(y_test, y_test_pred, squared = False))
 
 
 @app.get("/predict/")
-def predict (Mes:int,Géneros:str,Acceso_temprano):
+def predict (Géneros:str,Acceso_temprano):
     """
     Esta función deber recibir 
         - mes:el mes con números del 1 al 12
@@ -137,7 +137,7 @@ def predict (Mes:int,Géneros:str,Acceso_temprano):
     'Género_Photo Editing',  'Género_RPG',  'Género_Racing',  'Género_Simulation',  'Género_Software Training', 
     'Género_Sports',  'Género_Strategy', 'Género_Utilities',  'Género_Video Production',  'Género_Web Publishing']
     """
-    columnas_modelo = x.columns.tolist()[1:23]
+    columnas_modelo = x.columns.tolist()[0:22]
     columnas_usuario_lista = Géneros.split(", ")
     # Crea un conjunto (set) con las columnas proporcionadas por el usuario
     columnas_usuario = set(columnas_usuario_lista)
@@ -149,6 +149,6 @@ def predict (Mes:int,Géneros:str,Acceso_temprano):
     df_usuario = pd.DataFrame(valores_usuario, index=[0])
     # Convierte el DataFrame en una lista ordenada
     género = df_usuario.to_numpy().tolist()[0]
-    features = [Mes]+género+[Acceso_temprano]
+    features = género+[Acceso_temprano]
     x_pred = np.array(features).reshape(1, -1)
     return {'Predicción de precio': float(Modelo_árbol.predict(x_pred)), 'RMSE':float(rmse)}
